@@ -1,6 +1,14 @@
 # botzone-local-runner
 Botzone local runner for Chinese-Standard-Mahjong on UNIX-like Systems
 
+非常非常简陋
+
+只支持 long-time running 和简单交互
+
+没有加时间/内存限制
+
+~~大概以后也不会加~~
+
 ## 食用指南
 
 将 `runner.cpp` 中的 `bot_path` 和 `judger_path` 改成你的，然后干就完了
