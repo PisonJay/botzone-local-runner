@@ -156,8 +156,7 @@ int main(int argc,const char* argv[]) {
     if(!quiet_mode) {
         puts("initdata:");
         printf(writer.write(initdata).c_str());
-    }
-
+    } 
     for(int i=0;i<4;i++) run_bot(i,true);
     outputValue["log"].append(botValue);
 
@@ -182,4 +181,6 @@ int main(int argc,const char* argv[]) {
             break;
         }
     }
+	for(int i=0;i<4;i++)
+		bots[i].Kill(SIGKILL);
 }
