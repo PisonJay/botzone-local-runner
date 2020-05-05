@@ -13,6 +13,8 @@ if __name__ == "__main__":
         with open('result.json','r') as f:
             result=json.loads(f.read())
         print('Round %d:' % i,result)
+        if result['display']['action'] not in ('HU','HUANG'):
+            os.system('cp log.json '+'log.%d.json' % i)
         Min=0
         Max=0
         Player=-1
