@@ -7,6 +7,9 @@ ROUND_CNT = 10 # 要跑的对局数
 points=[0 for i in range(4)]
 wins  =[0 for i in range(4)]
 blow  =[0 for i in range(4)]
+
+fan_cnt = {}
+
 if __name__ == "__main__":
     for i in range(ROUND_CNT):
         os.system("./runner -q > result.json")
@@ -15,6 +18,12 @@ if __name__ == "__main__":
         print('Round %d:' % i,result)
         if result['display']['action'] not in ('HU','HUANG'):
             os.system('cp log.json '+'log.%d.json' % i)
+        if result['display']['action'] == 'HU':
+            for x in result['display']['fan']:
+                if x["name"] in fan_cnt:
+                    fan_cnt[x["name"]]+=x["cnt"]
+                else:
+                    fan_cnt[x["name"]]=x["cnt"]
         Min=0
         Max=0
         Player=-1
@@ -33,3 +42,4 @@ if __name__ == "__main__":
     print('total/avg points:\t%d/%d/%d/%d\t|\t%.2f/%.2f/%.2f/%.2f' % (points[0],points[1],points[2],points[3],points[0]/ROUND_CNT,points[1]/ROUND_CNT,points[2]/ROUND_CNT,points[3]/ROUND_CNT))
     print('total/avg wins:  \t%d/%d/%d/%d\t|\t%.2f/%.2f/%.2f/%.2f'% (wins[0],wins[1],wins[2],wins[3],wins[0]/ROUND_CNT,wins[1]/ROUND_CNT,wins[2]/ROUND_CNT,wins[3]/ROUND_CNT))
     print('total/avg blow:  \t%d/%d/%d/%d\t|\t%.2f/%.2f/%.2f/%.2f'% (blow[0],blow[1],blow[2],blow[3],blow[0]/ROUND_CNT,blow[1]/ROUND_CNT,blow[2]/ROUND_CNT,blow[3]/ROUND_CNT))
+    print('fan_cnt:',sorted([(fan_cnt[k],k) for k in fan_cnt],reverse=True))
